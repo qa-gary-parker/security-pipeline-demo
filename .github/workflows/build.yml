@@ -16,13 +16,19 @@ jobs:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   owasp-zap:
-    name: OWASP ZAP
+    name: OWASP ZAP Baseline Scan
     runs-on: ubuntu-latest
     steps:
-      - name: ZAP Scan
-        uses: zaproxy/action-full-scan@v0.3.0
+      - uses: zaproxy/action-baseline@v0.6.1
         with:
-          target: 'https://www.zaproxy.org/'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          target: 'https://google.com'
+          rules_file_name: ''
+          docker_name: ''
+          cmd_options: ''
+          issue_title: ''
+          fail_action: ''
+          allow_issue_writing: ''
