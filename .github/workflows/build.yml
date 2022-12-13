@@ -6,27 +6,9 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
-  sonarcloud:
-    name: SonarCloud
+  ChatGPT:
+    name: ChatGPT
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # Set 0 to fetch all history for all branches and tags
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}      
-
-  owasp-zap:
-    name: OWASP ZAP Baseline Scan
-    runs-on: ubuntu-latest
-    steps:
-      - uses: zaproxy/action-baseline@v0.6.1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          target: 'https://www.google.com'
-          docker_name: 'owasp/zap2docker-stable'
-          fail_action: true
-          allow_issue_writing: true
+      - name: ChatGPT Integration
+        uses: kxxt/chatgpt-action@v0.3
